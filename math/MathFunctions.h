@@ -6,5 +6,6 @@ namespace osquery {
 		public:
 			RegistryFactory();
 			int add(int a, int b);
+			double power(int a, int b);
 	};
 }
