@@ -9,7 +9,7 @@ project(cmakeLearn)
 # 通过这样的机制，将可以通过预定义一些参数和变量来控制代码的生成
 configure_file (
 	"${PROJECT_SOURCE_DIR}/config/config.h.in"
-	"${PROJECT_SOURCE_DIR}/config/config.h"
+	"${PROJECT_BINARY_DIR}/config/config.h"
 )
 # 是否使用自己的 MathFunctions 库
 # option 命令添加了一个 USE_MYMATH 选项，并且默认值为 ON
@@ -22,7 +22,7 @@ if (USE_MYMATH)
  set (EXTRA_LIBS ${EXTRA_LIBS} MathFunctions)
 endif (USE_MYMATH)
 
-include_directories ("${PROJECT_SOURCE_DIR}/config")
+include_directories ("${PROJECT_BINARY_DIR}/config")
 add_subdirectory (config)
 
 # 并将名称保存到 DIR_SRCS 变量
@@ -36,5 +36,6 @@ target_link_libraries (Demo ${EXTRA_LIBS})
 
 message(STATUS "-------------Show Global variable CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}")
 message(STATUS "-------------Show Global variable PROJECT_SOURCE_DIR: ${PROJECT_SOURCE_DIR}")
+message(STATUS "-------------Show Global variable PROJECT_BINARY_DIR: ${PROJECT_BINARY_DIR}")
 message(STATUS "-------------Show Global variable PROJECT_SOURCE_DIR: ${EXTRA_LIBS}")
 
