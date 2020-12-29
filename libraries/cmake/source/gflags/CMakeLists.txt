@@ -22,7 +22,13 @@ function(gflagsMain)
 
   target_include_directories(thirdparty_gflags SYSTEM INTERFACE
     "${CMAKE_CURRENT_BINARY_DIR}/submodule/include"
-  )
+  )  
+  message(WARNING "\n\n--=--=--=--=--=--=-- gflagsMain\n"
+  "CMAKE_CURRENT_SOURCE_DIR : ${CMAKE_CURRENT_SOURCE_DIR}\n"
+  "CMAKE_CURRENT_BINARY_DIR : ${CMAKE_CURRENT_BINARY_DIR}/submodule\n"
+  "library_root : ${library_root}\n"
+  "copyInterfaceTargetFlagsTo(gflags_static thirdparty_cxx_settings) : ${thirdparty_cxx_settings}\n"
+  "--=--=--=--=--=--=--\n\n")
 endfunction()
 
 gflagsMain()

@@ -23,6 +23,9 @@ function(librariesMain)
 
   list(INSERT module_path_list 0 ${CMAKE_MODULE_PATH})
   overwrite_cache_variable("CMAKE_MODULE_PATH" STRING "${module_path_list}")
+  message(WARNING "\n\n--=--=--=--=--=--=-- overwrite_cache_variable
+    CMAKE_MODULE_PATH : ${CMAKE_MODULE_PATH}
+    --=--=--=--=--=--=--\n\n")
 
   add_library(thirdparty_cxx_settings INTERFACE)
   add_library(thirdparty_c_settings INTERFACE)
@@ -30,13 +33,13 @@ function(librariesMain)
   target_link_libraries(thirdparty_cxx_settings INTERFACE cxx_settings)
   target_link_libraries(thirdparty_c_settings INTERFACE c_settings)
 
-  if(DEFINED PLATFORM_POSIX)
-    set(compile_options
-      -Oz
-      -g0
-    )
-  endif()
-
+#  if(DEFINED PLATFORM_POSIX)
+#    set(compile_options
+#      -Oz
+#      -g0
+#    )
+#  endif()
+#
   set(defines
     NDEBUG
   )
@@ -50,6 +53,15 @@ function(librariesMain)
     ${defines}
   )
 
+  message(WARNING "\n\n--=--=--=--=--=--=-- overwrite_cache_variable \n\
+  target_link_libraries(thirdparty_cxx_settings INTERFACE thirdparty_options) \n\
+  target_link_libraries(thirdparty_c_settings INTERFACE thirdparty_options) \n\
+  add_library(osquery_thirdparty_extra_cxx_settings INTERFACE) \n\
+  add_library(osquery_thirdparty_extra_c_settings INTERFACE) \n\
+  target_link_libraries(thirdparty_cxx_settings INTERFACE osquery_thirdparty_extra_cxx_settings) \n\
+  target_link_libraries(thirdparty_c_settings INTERFACE osquery_thirdparty_extra_c_settings) \n\
+  --=--=--=--=--=--=--\n\n")
+	
   target_link_libraries(thirdparty_cxx_settings INTERFACE thirdparty_options)
   target_link_libraries(thirdparty_c_settings INTERFACE thirdparty_options)
 

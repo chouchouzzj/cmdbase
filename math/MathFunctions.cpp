@@ -12,7 +12,7 @@ namespace osquery {
 	double RegistryFactory::power(int a, int b)
 	{
 		std::cout << "power(a ** b) = ";
-		int res = a;
+		int res = 1;
 		for(int i=0;i<b;i++)
 			res = res * a;
 		return (double)res;

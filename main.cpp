@@ -7,6 +7,8 @@
  #include "math.h"
 #endif
 
+#include <gflags/gflags.h>
+
 using namespace std;
 
 namespace A
@@ -18,23 +20,32 @@ namespace A
     }
 }
 
-int main() {
+DEFINE_int32(num_1, 3, "num one");
+DEFINE_int32(num_2, 4, "num two");
+
+
+int main(int argc, char** argv) {
     std::cout << "Hello, World!" << std::endl;
 	
 	std::cout << A::a << std::endl;
 	std::cout << A::B::a << std::endl;
-	
+
+	// 解析gflags参数，只需要1行代码
+	gflags::ParseCommandLineFlags(&argc, &argv, true);
+	int num_1 = FLAGS_num_1;
+	int num_2 = FLAGS_num_2;
+
 #ifdef USE_MYMATH
 	std::cout << osquery::abcd << std::endl;
 	
 	auto rf = new osquery::RegistryFactory();
-	std::cout << rf->add(3, 5) << std::endl;
+	std::cout << rf->add(num_1, num_2) << std::endl;
 	
 	osquery::RegistryFactory rfobj;
-	std::cout << rfobj.add(32, 5) << std::endl;
+	std::cout << rfobj.add(num_1, num_2) << std::endl;
 	
     std::cout << "Now we use our own Math library." << endl;
-    double result = rfobj.power(3, 4);
+    double result = rfobj.power(num_1, num_2);
     std::cout << result << endl;
 #else
     std::cout << "Now we use the standard library." << endl;

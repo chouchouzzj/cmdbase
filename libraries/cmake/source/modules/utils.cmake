@@ -128,6 +128,7 @@ function(importSourceSubmodule)
 # ARGS_SHALLOW_SUBMODULES  = src
 # ARGS_NO_RECURSIVE  = FALSE
 # ARGS_PATCH  =
+  
   cmake_parse_arguments(
     ARGS
     "NO_RECURSIVE"
@@ -135,6 +136,13 @@ function(importSourceSubmodule)
     "SUBMODULES;SHALLOW_SUBMODULES;PATCH"
     ${ARGN}
   )
+  message(WARNING "\n\n--=--=--=--=--=--=-- importSourceSubmodule
+  ARGS_NAME : ${ARGS_NAME}
+  ARGS_SUBMODULES : ${ARGS_SUBMODULES}
+  ARGS_SHALLOW_SUBMODULES : ${ARGS_SHALLOW_SUBMODULES}
+  ARGS_NO_RECURSIVE : ${ARGS_NO_RECURSIVE}
+  ARGS_PATCH : ${ARGS_PATCH}
+  --=--=--=--=--=--=--\n\n")
 
   if("${ARGS_NAME}" STREQUAL "modules")
     message(FATAL_ERROR "Invalid library name specified: ${ARGS_NAME}")
@@ -210,8 +218,11 @@ function(importSourceSubmodule)
   unset(CMAKE_C_CLANG_TIDY)
   unset(CMAKE_CXX_CLANG_TIDY)
 
+  message("\n\n\n--=--=--=--=--=--=--\n"
+    "add_subdirectory( ${directory_path} \t ${CMAKE_BINARY_DIR}/libs/src/${ARGS_NAME} )\n"
+    "--=--=--=--=--=--=--\n\n\n")
   add_subdirectory(
     "${directory_path}"
     "${CMAKE_BINARY_DIR}/libs/src/${ARGS_NAME}"
-  )
+  )  
 endfunction()
