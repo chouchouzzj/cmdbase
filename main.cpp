@@ -14,7 +14,8 @@ using namespace std;
 namespace A
 {
     int a = 100;
-    namespace B            //嵌套一个命名空间B
+	//嵌套一个命名空间B
+    namespace B
     {
         int a =20;
     }
